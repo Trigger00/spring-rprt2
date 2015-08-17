@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="JRStudent" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04910889-d930-4a8c-9158-8ffcc6f56ef0">
+	<property name="ireport.zoom" value="1.4641000000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="718"/>
+	<parameter name="P_EXITO" class="java.lang.String"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="codigo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="126" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="22" width="247" height="50" uuid="37d77195-0326-4922-b1e5-884383398185"/>
+				<imageExpression><![CDATA["Letras.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="518" splitType="Stretch">
+			<staticText>
+				<reportElement x="187" y="0" width="200" height="20" uuid="61ea338b-1904-4cab-95ae-dec0017ff232"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[GRADO DE BACHILLER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="34" width="200" height="20" uuid="a3b5e58b-5cb6-4b6c-bbec-66882b888c73"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[IFORME N° 336 UR/OE 15]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="54" width="62" height="17" uuid="7334caeb-0a7e-4858-bf4e-eeaea21d62ec"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[DE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="77" width="62" height="17" uuid="03714bb1-eab0-4ebc-b52d-352a87d72265"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[AL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="101" width="62" height="17" uuid="d2f5a284-befc-4979-9984-2f3f554eeb62"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[ASUNTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="124" width="62" height="17" uuid="158d1807-d3b9-408a-9cdf-29d28dc3e200"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="54" width="10" height="17" uuid="89db9357-cdfd-49b7-bb16-20170e9dc6be"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="77" width="10" height="17" uuid="6b90c8f4-df22-436f-a75a-6549388c820d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="101" width="10" height="17" uuid="be288beb-b0db-4323-9873-1b0c0dc027e4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="124" width="10" height="17" uuid="3d8488f8-5f8e-49b0-bc41-014157a4b8d0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="54" width="116" height="17" uuid="68036ff7-64d5-4c38-83a4-c341ee671047"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Unidad de Registro]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="163" y="77" width="116" height="17" uuid="8173854d-87a4-441a-bfd6-321671107aca"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Decano de la Facultad de  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="278" y="77" width="100" height="17" uuid="ee424a74-7648-4e79-a050-36f49e838572"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" "+$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="163" y="101" width="150" height="17" uuid="1f991807-10bc-4d82-858a-0ab26d339c74"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="163" y="124" width="160" height="17" uuid="35f75384-1c55-4576-8e93-72726853705c"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[La Molina 15 de Junio de 2015]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="180" width="456" height="43" uuid="0c7c3f2b-86b9-4c6f-aafc-aa0032d71ad5"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Calibri" size="12" isBold="false" isItalic="false" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Con relación a la sociedad sobre  "+$P{P_EXITO}.toUpperCase() +" presentado por:  " +$P{P_EXITO}.toUpperCase() +", con matricula "+  $P{P_EXITO}.toUpperCase()+", de la facultad de "+ $P{P_EXITO}.toUpperCase()+", Especialidad de "+$P{P_EXITO}.toUpperCase()+" informo a usted, lo siguiente"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="240" width="218" height="17" uuid="671612bc-0d09-4d17-9d78-0e6faceec8b1"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE CREDITOS APROBADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="266" width="187" height="17" uuid="05378655-86cf-4904-b3f2-553ce923dc42"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PROFESOR CONSEJERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="294" width="187" height="17" uuid="2fd7937b-4c8e-405d-ad0b-e0414db9b234"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PROMOCÍON]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="316" width="187" height="17" uuid="0f61c4a7-fc18-422b-8302-c9c12e3fff7a"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[SE ADJUNTA]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="313" y="240" width="100" height="17" uuid="08129b4d-ce70-4679-80cc-5c9d00178a33"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="240" width="10" height="17" uuid="bc0b6b99-e399-4007-b3da-daebf84d9e76"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="266" width="10" height="17" uuid="465d2e3c-641e-4dc4-b517-bce45c6bad55"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="294" width="10" height="17" uuid="f4230de9-1a23-473f-8faf-770864193d6b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="278" y="316" width="10" height="17" uuid="3f7c02b4-bee3-46eb-adb1-a96256cf09b0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="313" y="266" width="100" height="17" uuid="60972e53-64fa-4d42-b335-c3ff83161f75"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="294" width="100" height="17" uuid="ef5f52dc-bcda-4313-8794-92a0404f787b"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="313" y="316" width="100" height="17" uuid="4dc08b28-8373-4299-9771-8e5ceb153c04"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{P_EXITO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="288" y="445" width="90" height="17" uuid="2b632450-bfcf-4664-9a19-d524f89f09ba"/>
+				<textElement>
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Atentamente,]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="472" width="173" height="16" uuid="0df093c8-defa-4f9c-9a4f-89e5c2ba9aaa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Lic. Victoria Arrué Muñoz]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="487" width="173" height="16" uuid="a1439f51-33cc-45ee-a8b3-33de96de5756"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[JEFE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="502" width="173" height="16" uuid="888ff4f7-c2ab-43f5-aa2d-17b78bbf840c"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[UNIDAD DE REGISTRO]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="77">
+			<staticText>
+				<reportElement x="60" y="6" width="456" height="17" uuid="7e71cf12-e186-4100-a869-a457d00d1174"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[________________________________________________________]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="24" width="456" height="17" uuid="3baa7e96-7939-40a9-a2b1-132ef8fed701"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TELEFONOS: 617-7800 ANEXO 138 - 468 DIRECTO: 614-7860]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="41" width="456" height="17" uuid="7425a079-ce11-4bef-812c-996941ab98da"/>
+				<textElement textAlignment="Center">
+					<font fontName="Calibri" size="12" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[e-mail: estudios@lamolina.edu.pe]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
