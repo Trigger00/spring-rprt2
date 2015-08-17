@@ -304,39 +304,17 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-12">
-						<h1 class="page-header">Blank</h1>
+						<h1 class="page-header">Bachiller</h1>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
 				<!-- /.row -->
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Basic Form Elements</div>
+				<div class="panel-heading">Bachiller</div>
 				<div class="panel-body">
 
-
-
-					<%-- <form method="get" action="<%=request.getContextPath()%>/search">
-						<div class="small-3 columns">
-							<input type="text" id="txt" name="searchString">
-						</div>
-
-						<div class="small-5 columns end">
-							<button id="button-id" type="submit">Search Teams</button>
-						</div>
-						<div>
-							<label>Matricula </label> <input type="text" name="matricula"
-								value="${alumnos.matricula}">
-
-						</div>
-						<div>
-							<label>Alumnos Nombre</label> <input type="text"
-								name="alu_nombre" value="${alumnos.alu_nombre}">
-
-						</div>
-						<div></div>
-					</form>--%>
-			<div>
+					<div>
 
 						<form method="get" action="<%=request.getContextPath()%>/search">
 							<div class="row">
@@ -355,11 +333,19 @@
 							<!-- /.row -->
 
 						</form>
-</div>
-<br>
-					
+					</div>
+					<br>
 
 
+	<c:if test="${not empty msj}">
+		    <div class="alert alert-${css} alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" 
+                                aria-label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+			<strong>${msj}</strong>
+		    </div>
+		</c:if>
 
 
 					<div class="panel panel-default">
@@ -369,6 +355,8 @@
 
 							<form class="form-horizontal" role="form"
 								action="<%=request.getContextPath()%>/guardar">
+								 <input type="hidden" name="id" value="${msj}"/> 
+								
 								<div class="form-group">
 									<label for="matricula_1" class="col-lg-1 control-label">matricula</label>
 									<div class="col-lg-2">
@@ -434,101 +422,66 @@
 								</div>
 
 
-
-								<div class="form-group">
-									<label for="ejemplo_password_3" class="col-lg-1 control-label">Contraseña</label>
-									<div class="col-lg-10">
-										<input type="password" class="form-control"
-											id="ejemplo_password_3" placeholder="Contraseña">
-									</div>
-								</div>
 								<div class="form-group">
 									<div class="col-lg-offset-1 col-lg-10">
-										<div class="checkbox">
-											<label> <input type="checkbox"> No cerrar
-												sesión
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-lg-offset-1 col-lg-10">
-										<button type="submit" class="btn btn-default">Entrar</button>
+										<button type="submit" class="btn btn-default">Guardar</button>
 									</div>
 								</div>
 							</form>
 
 
-							<form method="post"
-								action="<%=request.getContextPath()%>/guardar"
-								class="form-horizontal">
 
-								<div>
-									<label>Matricula </label> <input type="text" name="matricula"
-										value="${alumnos.alumnosPromCiclos.matricula}">
-
-								</div>
-								<div>
-									<label>Alumnos Nombre</label> <input type="text"
-										name="alu_nombre"
-										value="${alumnos.alumnosPromCiclos.matricula}">
-
-								</div>
-
-								<div>
-									<label class="col-sm-2 control-label">Name</label>
-									<div class="col-sm-10">
-										<input path="name" type="text" class="form-control" id="name"
-											placeholder="Name" />
-
-									</div>
-								</div>
-								<input type="submit" value="Guardar" class="btn btn-default" />
-							</form>
 
 						</div>
 					</div>
 
 
 
-
-
-
-
-
-
-
-
-					<table class="table table-striped">
-						<tr>
-							<th>id</th>
-							<th>matricula</th>
-							<th>Alumno nombre</th>
-						</tr>
-
-
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Id</th>
+								<th>Matricula</th>
+								<th>Alumno nombre</th>
+								<th>Ppg</th>
+								<th>facultad</th>
+								<th>Carrera</th>
+								<th>Profesor Consejero</th>
+								<th>Ciclo</th>
+								<th>Usuario</th>
+								<th>Acción</th>
+							</tr>
+						</thead>
 
 
 						<c:forEach var="i2" items="${registros}">
-							<tr>
-								<th>${i2.id}</th>
-								<th>${i2.matricula}</th>
-								<th>${i2.aluNombre}</th>
-								<a href="${i2.id}/eliminar"> Eliminar </a>
-								<td><spring:url value="${i2.id}/pdf" var="userUrl" /> <spring:url
-										value="${i2.id}/eliminar" var="deleteUrl" /> <spring:url
-										value="${i2.id}/eliminar" var="updateUrl" />
+							<tbody>
+								<tr>
+									<td>${i2.id}</td>
+									<td>${i2.matricula}</td>
+									<td>${i2.aluNombre}</td>
+									<td>${i2.ppg}</td>
+									<td>${i2.facNombre}</td>
+									<td>${i2.espNombre}</td>
+									<td>${i2.proCodigo}</td>
+									<td>${i2.ciclo}</td>
+									<td>${i2.usuario}</td>
 
-									<button class="btn btn-info"
-										onclick="location.href='${userUrl}'">Reporte</button>
-									<button class="btn btn-primary"
-										onclick="location.href='${updateUrl}'">Update</button>
-									<button class="btn btn-danger"
-										onclick="this.disabled=true;post('${deleteUrl}')">Eliminar</button>
-								</td>
+									<td><spring:url value="${i2.id}/pdf" var="userUrl" /> <spring:url
+											value="${i2.id}/editar" var="deleteUrl" /> <spring:url
+											value="${i2.id}/eliminar" var="updateUrl" />
 
-							</tr>
+										<button class="btn btn-info"
+											onclick="location.href='${userUrl}'">Reporte</button>
+										<button class="btn btn-primary"
+											onclick="location.href='${deleteUrl}'">editar</button>
+										<button class="btn btn-danger"
+											onclick="location.href='${updateUrl}'">eliminar</button>
+									
+									</td>
 
+								</tr>
+							</tbody>
 
 						</c:forEach>
 					</table>

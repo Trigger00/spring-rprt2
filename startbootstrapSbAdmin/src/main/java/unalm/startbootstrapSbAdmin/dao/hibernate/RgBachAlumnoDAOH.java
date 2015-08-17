@@ -30,7 +30,7 @@ public class RgBachAlumnoDAOH extends BaseHibernateDAO implements
 	}
 
 	public void update(RgBachAlumno t) {
-		// TODO Auto-generated method stub
+		this.getSession().merge(t);
 
 	}
 

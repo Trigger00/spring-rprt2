@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import unalm.startbootstrapSbAdmin.controller.rgBachAlumno.RgBachAlumnoService;
 import unalm.startbootstrapSbAdmin.dao.ProgramaDAO;
 import unalm.startbootstrapSbAdmin.model.Alumnos;
+import unalm.startbootstrapSbAdmin.model.Especial;
+import unalm.startbootstrapSbAdmin.model.Facultad;
 import unalm.startbootstrapSbAdmin.model.Programa;
 import unalm.startbootstrapSbAdmin.model.PromCiclos;
 import unalm.startbootstrapSbAdmin.model.RgBachAlumno;
@@ -52,22 +54,43 @@ public class AlumnosController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 
 		System.out.println("entro a editar");
-
+/*
 		Alumnos alumnos = service.findAlumno(id);
 		if (alumnos == null) {
 			return "test/index";
-		}
+	}
+	*/
+		RgBachAlumno rgBachAlumno = service.findRegistro(id);
+		
+		Facultad facultad = new Facultad();
+		facultad.setFacNombre(rgBachAlumno.getFacNombre());
 
-		model.addAttribute("alumnos", alumnos);
-		/*
-		 * List<Alumnos> alumnos3 = service.allAlumnos();
-		 * model.addAttribute("alumnos2", alumnos3);
-		 * 
-		 * List<RgBachAlumno> registro = service.allRegistros();
-		 * model.addAttribute("registros", registro);
-		 */
-		System.out.println(alumnos.getAlu_nombre());
-		System.out.println(alumnos.getMatricula());
+		Especial especial = new Especial();
+		especial.setEspNombre(rgBachAlumno.getEspNombre());
+		
+		
+		Alumnos alumnos = new Alumnos();
+		alumnos.setMatricula(rgBachAlumno.getMatricula());
+		alumnos.setAlu_nombre(rgBachAlumno.getAluNombre());
+		alumnos.setAlumnosFac(facultad);
+		alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
+		alumnos.setEspecial(especial);
+
+
+		PromCiclos promCiclos = new PromCiclos();
+		promCiclos.setAlumnosPromCiclos(alumnos);
+		promCiclos.setCiclo(rgBachAlumno.getCiclo());
+		promCiclos.setEspCodigo(rgBachAlumno.getEspNombre());
+		promCiclos.setFacCodigo(rgBachAlumno.getFacNombre());
+		promCiclos.setPpg( Long.valueOf(rgBachAlumno.getPpg()));
+		
+		
+		model.addAttribute("msj", rgBachAlumno.getId());
+	
+		//return "test/index";
+		List<RgBachAlumno> registro = service.allRegistros();
+		model.addAttribute("registros", registro);
+		model.addAttribute("alumnos", promCiclos);
 		return "test/index";
 	}
 
@@ -115,7 +138,7 @@ public class AlumnosController {
 	}
 
 	@RequestMapping("guardar")
-	public String guardar(RgBachAlumno alumnos) {
+	public String guardar(RgBachAlumno alumnos,RgBachAlumno msj) {
 		System.out.println("entro a guardar 2");
 		service.guardAlumno(alumnos);
 

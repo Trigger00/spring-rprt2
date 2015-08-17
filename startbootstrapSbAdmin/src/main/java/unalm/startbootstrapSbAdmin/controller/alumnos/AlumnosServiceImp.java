@@ -32,7 +32,14 @@ public class AlumnosServiceImp implements AlumnosService {
 	}
 
 	public void guardAlumno(RgBachAlumno rgBachAlumno) {
-		rgBachAlumnoDao.save(rgBachAlumno);
+		
+		System.out.println("su id es "+rgBachAlumno.getId());
+		if(rgBachAlumno.getId()==null){
+			//rgBachAlumnoDao.update(rgBachAlumno);
+			rgBachAlumnoDao.save(rgBachAlumno);
+		}
+		
+		rgBachAlumnoDao.update(rgBachAlumno);
 	}
 
 	public List<RgBachAlumno> allRegistros() {
