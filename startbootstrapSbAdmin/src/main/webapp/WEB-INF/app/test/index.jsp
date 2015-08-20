@@ -434,7 +434,7 @@
 										<input type="text" class="form-control" id=""
 											profesor_1""
 											placeholder="Profesor consejero"
-											value="${alumnos.alumnosPromCiclos.pro_codigo}"
+											value="${alumnos.alumnosPromCiclos.alumnosProfesor.proNombre}"
 											name="proCodigo">
 									</div>
 								</div>

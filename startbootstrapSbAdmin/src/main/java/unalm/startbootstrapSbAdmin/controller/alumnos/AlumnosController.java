@@ -27,6 +27,7 @@ import unalm.startbootstrapSbAdmin.model.Profesor;
 import unalm.startbootstrapSbAdmin.model.Programa;
 import unalm.startbootstrapSbAdmin.model.PromCiclos;
 import unalm.startbootstrapSbAdmin.model.RgBachAlumno;
+import unalm.startbootstrapSbAdmin.model.TramitesDoc;
 
 @Controller
 @RequestMapping(value = { "/" })
@@ -72,11 +73,15 @@ public class AlumnosController {
 		Especial especial = new Especial();
 		especial.setEspNombre(rgBachAlumno.getEspNombre());
 
+		Profesor profesor = new Profesor();
+		profesor.setProCodigo(rgBachAlumno.getProCodigo());
+
 		Alumnos alumnos = new Alumnos();
 		alumnos.setMatricula(rgBachAlumno.getMatricula());
 		alumnos.setAlu_nombre(rgBachAlumno.getAluNombre());
 		alumnos.setAlumnosFac(facultad);
-		alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
+		// alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
+		alumnos.setAlumnosProfesor(profesor);
 		alumnos.setEspecial(especial);
 
 		PromCiclos promCiclos = new PromCiclos();
@@ -102,17 +107,17 @@ public class AlumnosController {
 		System.out.println("El valo del searchString es " + searchString);
 
 		PromCiclos promCiclos = service.findAlumno2(searchString);
+		TramitesDoc tramitesDoc = service.findTramite(searchString);
+		System.out.println("la matricula de tramite es de: "+tramitesDoc.getAlumnosTramitesDoc().getAlu_nombre());
+
 
 		if (promCiclos == null) {
 			List<RgBachAlumno> registro = service.allRegistros();
 			model.addAttribute("registros", registro);
 			model.addAttribute("css", "danger");
-			model.addAttribute("msg",
-					"No se encontro el alumno con la matricula: "
-							+ searchString);
+			model.addAttribute("msg","No se encontro el alumno con la matricula: "+ searchString);
 			return "test/index";
-
-		}
+			}
 
 		model.addAttribute("alumnos", promCiclos);
 		System.out.println(promCiclos.getAlumnosPromCiclos().getMatricula());
@@ -133,18 +138,20 @@ public class AlumnosController {
 
 		System.out.println("entro a guardar 2");
 
-		/*Profesor profesor = serviceProfesor.findProfesor(alumnos.getProCodigo());
-		System.out.println("Nombre del profesor: " + profesor.getProNombre());
-		RgBachAlumno rgBachAlumnoDato = new  RgBachAlumno();
-		rgBachAlumnoDato.setId(alumnos.getId());
-		rgBachAlumnoDato.setAluNombre(alumnos.getAluNombre());
-		rgBachAlumnoDato.setCiclo(alumnos.getCiclo());
-		rgBachAlumnoDato.setEspNombre(alumnos.getEspNombre());
-		rgBachAlumnoDato.setFacNombre(alumnos.getFacNombre());
-		rgBachAlumnoDato.setMatricula(alumnos.getMatricula());
-		rgBachAlumnoDato.setPpg(alumnos.getPpg());
-		rgBachAlumnoDato.setProCodigo(profesor.getProNombre());
-		*/
+		/*
+		 * Profesor profesor =
+		 * serviceProfesor.findProfesor(alumnos.getProCodigo());
+		 * System.out.println("Nombre del profesor: " +
+		 * profesor.getProNombre()); RgBachAlumno rgBachAlumnoDato = new
+		 * RgBachAlumno(); rgBachAlumnoDato.setId(alumnos.getId());
+		 * rgBachAlumnoDato.setAluNombre(alumnos.getAluNombre());
+		 * rgBachAlumnoDato.setCiclo(alumnos.getCiclo());
+		 * rgBachAlumnoDato.setEspNombre(alumnos.getEspNombre());
+		 * rgBachAlumnoDato.setFacNombre(alumnos.getFacNombre());
+		 * rgBachAlumnoDato.setMatricula(alumnos.getMatricula());
+		 * rgBachAlumnoDato.setPpg(alumnos.getPpg());
+		 * rgBachAlumnoDato.setProCodigo(profesor.getProNombre());
+		 */
 		service.guardAlumno(alumnos);
 
 		redirectAttributes.addFlashAttribute("css", "success");

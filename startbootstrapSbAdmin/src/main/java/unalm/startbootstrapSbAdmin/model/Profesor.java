@@ -1,14 +1,19 @@
 package unalm.startbootstrapSbAdmin.model;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "profesor", catalog = "elbernab")
-public class Profesor implements Serializable{
+public class Profesor implements Serializable {
 
 	@Id
 	@Column(name = "PRO_CODIGO")
@@ -40,6 +45,9 @@ public class Profesor implements Serializable{
 	@Column(name = "PERSO")
 	private Long perso;
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alumnosProfesor")
+	private Set<Alumnos> alumnos = new HashSet<Alumnos>(0);
+
 	public Profesor() {
 		super();
 	}
@@ -47,7 +55,7 @@ public class Profesor implements Serializable{
 	public Profesor(String proCodigo, String proPaterno, String proMaterno,
 			String proNom, String proNombre, String proSexo, String depCodigo,
 			String ubigeo, String direccion, String telefono, String email,
-			String activo, String emailUnalm, Long perso) {
+			String activo, String emailUnalm, Long perso, Set<Alumnos> alumnos) {
 		super();
 		this.proCodigo = proCodigo;
 		this.proPaterno = proPaterno;
@@ -63,6 +71,7 @@ public class Profesor implements Serializable{
 		this.activo = activo;
 		this.emailUnalm = emailUnalm;
 		this.perso = perso;
+		this.alumnos = alumnos;
 	}
 
 	public String getProCodigo() {
@@ -175,6 +184,14 @@ public class Profesor implements Serializable{
 
 	public void setPerso(Long perso) {
 		this.perso = perso;
+	}
+
+	public Set<Alumnos> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(Set<Alumnos> alumnos) {
+		this.alumnos = alumnos;
 	}
 
 }

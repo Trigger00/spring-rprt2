@@ -1,6 +1,5 @@
 package unalm.startbootstrapSbAdmin.model;
 
-
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -22,9 +21,12 @@ public class Alumnos implements Serializable {
 	@Id
 	@Column(name = "matricula")
 	private String matricula;
-
-	@Column(name = "pro_codigo")
-	private String pro_codigo;
+	/*
+	 * @Column(name = "pro_codigo") private String pro_codigo;
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "pro_codigo")
+	private Profesor alumnosProfesor;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "fac_codigo")
@@ -73,36 +75,31 @@ public class Alumnos implements Serializable {
 	@Column(name = "convenio")
 	private String convenio;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="alumnosPromCiclos")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alumnosPromCiclos")
 	private Set<PromCiclos> promCiclos = new HashSet<PromCiclos>(0);
-	
-	
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "alumnosTramitesDoc")
+	private Set<TramitesDoc> tramitesDoc = new HashSet<TramitesDoc>(0);
+
 	public Alumnos() {
 		super();
 	}
-	
-	
 
 	public Alumnos(String matricula) {
 		super();
 		this.matricula = matricula;
 	}
 
-
-
-
-
-
-
-	public Alumnos(String matricula, String pro_codigo, Facultad alumnosFac,
-			Especial especial, String situacion, String alu_nombre,
-			String esp_grad, String ciclo_ult, String ciclo_r, String email,
-			String curricula, String perso, String usuario, String fecha,
-			String cambio_curricula, String fl_no_censado, String convenio,
-			Set<PromCiclos> promCiclos) {
+	public Alumnos(String matricula, Profesor alumnosProfesor,
+			Facultad alumnosFac, Especial especial, String situacion,
+			String alu_nombre, String esp_grad, String ciclo_ult,
+			String ciclo_r, String email, String curricula, String perso,
+			String usuario, String fecha, String cambio_curricula,
+			String fl_no_censado, String convenio, Set<PromCiclos> promCiclos,
+			Set<TramitesDoc> tramitesDoc) {
 		super();
 		this.matricula = matricula;
-		this.pro_codigo = pro_codigo;
+		this.alumnosProfesor = alumnosProfesor;
 		this.alumnosFac = alumnosFac;
 		this.especial = especial;
 		this.situacion = situacion;
@@ -119,9 +116,8 @@ public class Alumnos implements Serializable {
 		this.fl_no_censado = fl_no_censado;
 		this.convenio = convenio;
 		this.promCiclos = promCiclos;
+		this.tramitesDoc = tramitesDoc;
 	}
-
-
 
 	public String getMatricula() {
 		return matricula;
@@ -131,12 +127,12 @@ public class Alumnos implements Serializable {
 		this.matricula = matricula;
 	}
 
-	public String getPro_codigo() {
-		return pro_codigo;
+	public Profesor getAlumnosProfesor() {
+		return alumnosProfesor;
 	}
 
-	public void setPro_codigo(String pro_codigo) {
-		this.pro_codigo = pro_codigo;
+	public void setAlumnosProfesor(Profesor alumnosProfesor) {
+		this.alumnosProfesor = alumnosProfesor;
 	}
 
 	public Facultad getAlumnosFac() {
@@ -147,18 +143,13 @@ public class Alumnos implements Serializable {
 		this.alumnosFac = alumnosFac;
 	}
 
-
 	public Especial getEspecial() {
 		return especial;
 	}
 
-
-
 	public void setEspecial(Especial especial) {
 		this.especial = especial;
 	}
-
-
 
 	public String getSituacion() {
 		return situacion;
@@ -264,16 +255,20 @@ public class Alumnos implements Serializable {
 		this.convenio = convenio;
 	}
 
-
-
 	public Set<PromCiclos> getPromCiclos() {
 		return promCiclos;
 	}
 
-
-
 	public void setPromCiclos(Set<PromCiclos> promCiclos) {
 		this.promCiclos = promCiclos;
+	}
+
+	public Set<TramitesDoc> getTramitesDoc() {
+		return tramitesDoc;
+	}
+
+	public void setTramitesDoc(Set<TramitesDoc> tramitesDoc) {
+		this.tramitesDoc = tramitesDoc;
 	}
 
 }

@@ -11,6 +11,7 @@ import unalm.startbootstrapSbAdmin.dao.RgBachAlumnoDAO;
 import unalm.startbootstrapSbAdmin.model.Alumnos;
 import unalm.startbootstrapSbAdmin.model.PromCiclos;
 import unalm.startbootstrapSbAdmin.model.RgBachAlumno;
+import unalm.startbootstrapSbAdmin.model.TramitesDoc;
 
 @Service
 @Transactional
@@ -53,6 +54,10 @@ public class AlumnosServiceImp implements AlumnosService {
 
 	public PromCiclos findAlumno2(Long codigo) {
 		return alumnosDAO.get1(codigo);
+	}
+
+	public TramitesDoc findTramite(Long codigo) {
+		return alumnosDAO.get2(codigo);
 	}
 
 
