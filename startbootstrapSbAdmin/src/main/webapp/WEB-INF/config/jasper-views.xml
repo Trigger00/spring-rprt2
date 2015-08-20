@@ -15,9 +15,9 @@
 		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
 		p:url="classpath:JRStudent02 - copia.jrxml" p:reportDataKey="datasource" />
 
-	<bean id="helloReport"
+	<!--<bean id="helloReport"
 		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
-		p:url="classpath:report7.jrxml" />
+		p:url="classpath:report7.jrxml" />-->
 
 
 

@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import unalm.startbootstrapSbAdmin.controller.profesor.ProfesorService;
 import unalm.startbootstrapSbAdmin.controller.rgBachAlumno.RgBachAlumnoService;
 import unalm.startbootstrapSbAdmin.dao.ProgramaDAO;
 import unalm.startbootstrapSbAdmin.model.Alumnos;
 import unalm.startbootstrapSbAdmin.model.Especial;
 import unalm.startbootstrapSbAdmin.model.Facultad;
+import unalm.startbootstrapSbAdmin.model.Profesor;
 import unalm.startbootstrapSbAdmin.model.Programa;
 import unalm.startbootstrapSbAdmin.model.PromCiclos;
 import unalm.startbootstrapSbAdmin.model.RgBachAlumno;
@@ -38,6 +41,9 @@ public class AlumnosController {
 	@Autowired
 	RgBachAlumnoService serviceRegistro;
 
+	@Autowired
+	ProfesorService serviceProfesor;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 
@@ -54,21 +60,18 @@ public class AlumnosController {
 	public String editar(@PathVariable("id") Long id, Model model) {
 
 		System.out.println("entro a editar");
-/*
-		Alumnos alumnos = service.findAlumno(id);
-		if (alumnos == null) {
-			return "test/index";
-	}
-	*/
+		/*
+		 * Alumnos alumnos = service.findAlumno(id); if (alumnos == null) {
+		 * return "test/index"; }
+		 */
 		RgBachAlumno rgBachAlumno = service.findRegistro(id);
-		
+
 		Facultad facultad = new Facultad();
 		facultad.setFacNombre(rgBachAlumno.getFacNombre());
 
 		Especial especial = new Especial();
 		especial.setEspNombre(rgBachAlumno.getEspNombre());
-		
-		
+
 		Alumnos alumnos = new Alumnos();
 		alumnos.setMatricula(rgBachAlumno.getMatricula());
 		alumnos.setAlu_nombre(rgBachAlumno.getAluNombre());
@@ -76,80 +79,85 @@ public class AlumnosController {
 		alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
 		alumnos.setEspecial(especial);
 
-
 		PromCiclos promCiclos = new PromCiclos();
 		promCiclos.setAlumnosPromCiclos(alumnos);
 		promCiclos.setCiclo(rgBachAlumno.getCiclo());
 		promCiclos.setEspCodigo(rgBachAlumno.getEspNombre());
 		promCiclos.setFacCodigo(rgBachAlumno.getFacNombre());
-		promCiclos.setPpg( Long.valueOf(rgBachAlumno.getPpg()));
-		
-		
-		model.addAttribute("msj", rgBachAlumno.getId());
-	
-		//return "test/index";
+		promCiclos.setPpg(Long.valueOf(rgBachAlumno.getPpg()));
+
+		model.addAttribute("id", rgBachAlumno.getId());
+
 		List<RgBachAlumno> registro = service.allRegistros();
 		model.addAttribute("registros", registro);
 		model.addAttribute("alumnos", promCiclos);
+		model.addAttribute("css", "success");
+		model.addAttribute("msg", "El id es: " + rgBachAlumno.getId());
 		return "test/index";
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
 	public String Search(@RequestParam("searchString") Long searchString,
 			Model model) {
-
-		System.out.println("entro al search");
 		System.out.println("El valo del searchString es " + searchString);
 
-		///Alumnos alumnos = service.findAlumno(searchString);
 		PromCiclos promCiclos = service.findAlumno2(searchString);
-		
-		//if (alumnos == null) {
-		  if (promCiclos == null) {
+
+		if (promCiclos == null) {
 			List<RgBachAlumno> registro = service.allRegistros();
 			model.addAttribute("registros", registro);
-
+			model.addAttribute("css", "danger");
+			model.addAttribute("msg",
+					"No se encontro el alumno con la matricula: "
+							+ searchString);
 			return "test/index";
 
 		}
 
-	//	model.addAttribute("alumnos", alumnos);
-		 	model.addAttribute("alumnos", promCiclos);
-		/*
-		 * List<Alumnos> alumnos3 = service.allAlumnos();
-		 * model.addAttribute("alumnos2", alumnos3);
-		 * 
-		 * List<RgBachAlumno> registro = service.allRegistros();
-		 * model.addAttribute("registros", registro);
-		 */
-/*
-		 	System.out.println(alumnos.getAlu_nombre());
-		System.out.println(alumnos.getMatricula());
-		
-		*/
-		 	System.out.println(promCiclos.getAlumnosPromCiclos().getMatricula());
-		 	System.out.println(promCiclos.getAlumnosPromCiclos().getEspecial().getEspCodigo());
-		
+		model.addAttribute("alumnos", promCiclos);
+		System.out.println(promCiclos.getAlumnosPromCiclos().getMatricula());
 		List<RgBachAlumno> registro = service.allRegistros();
 		model.addAttribute("registros", registro);
 
 		return "test/index";
-		// return "redirect:";
 	}
 
-	@RequestMapping("guardar")
-	public String guardar(RgBachAlumno alumnos,RgBachAlumno msj) {
+	@RequestMapping(value = "guardar", method = RequestMethod.POST)
+	public String guardar(RgBachAlumno alumnos, RgBachAlumno id, Model model,
+			final RedirectAttributes redirectAttributes) {
+		System.out.println("el valor de alumnos es: " + alumnos);
+		System.out.println("el valor de alumnos es: " + alumnos.getMatricula());
+		if (alumnos.getMatricula().length() == 0) {
+			return "redirect:/";
+		}
+
 		System.out.println("entro a guardar 2");
+
+		/*Profesor profesor = serviceProfesor.findProfesor(alumnos.getProCodigo());
+		System.out.println("Nombre del profesor: " + profesor.getProNombre());
+		RgBachAlumno rgBachAlumnoDato = new  RgBachAlumno();
+		rgBachAlumnoDato.setId(alumnos.getId());
+		rgBachAlumnoDato.setAluNombre(alumnos.getAluNombre());
+		rgBachAlumnoDato.setCiclo(alumnos.getCiclo());
+		rgBachAlumnoDato.setEspNombre(alumnos.getEspNombre());
+		rgBachAlumnoDato.setFacNombre(alumnos.getFacNombre());
+		rgBachAlumnoDato.setMatricula(alumnos.getMatricula());
+		rgBachAlumnoDato.setPpg(alumnos.getPpg());
+		rgBachAlumnoDato.setProCodigo(profesor.getProNombre());
+		*/
 		service.guardAlumno(alumnos);
 
-		return "redirect:";
+		redirectAttributes.addFlashAttribute("css", "success");
+		redirectAttributes.addFlashAttribute("msg",
+				"Registro agregado exitosamente");
+		return "redirect:/";
 	}
 
-	@RequestMapping(value="{id}/eliminar")
+	@RequestMapping(value = "{id}/eliminar")
 	public String eliminar(@PathVariable("id") Long id, Model model) {
 		System.out.println("entro a eliminar");
 		serviceRegistro.deleteRegistro(id);
-		System.out.println("lo elimino");
+
 		return "redirect:/";
 	}
 
@@ -167,7 +175,15 @@ public class AlumnosController {
 		System.out.println("El id es :" + id);
 		RgBachAlumno rgBachAlumno = service.findRegistro(id);
 		System.out.println("datos del registro " + rgBachAlumno.getAluNombre());
-		parameterMap.put("P_EXITO", rgBachAlumno.getAluNombre());
+		parameterMap.put("P_EXITO", "GRADO DE BACHILLER");
+		parameterMap.put("P_MATRICULA", rgBachAlumno.getMatricula());
+		parameterMap.put("P_ALUNOMBRE", rgBachAlumno.getAluNombre());
+		parameterMap.put("P_FACNOMBRE", rgBachAlumno.getFacNombre());
+		parameterMap.put("P_ESPNOMBRE", rgBachAlumno.getEspNombre());
+		parameterMap.put("P_PROCODIGO", rgBachAlumno.getProCodigo());
+		parameterMap.put("P_CICLO", rgBachAlumno.getCiclo());
+		parameterMap.put("P_PPG", rgBachAlumno.getPpg());
+
 		// parameterMap.put("P_EXITO", "datoooos");
 		parameterMap.put("datasource", JRdataSource);
 
@@ -175,7 +191,7 @@ public class AlumnosController {
 		modelAndView = new ModelAndView("pdfReport", parameterMap);
 
 		return modelAndView;
-
+		// return null;
 	}
 
 }

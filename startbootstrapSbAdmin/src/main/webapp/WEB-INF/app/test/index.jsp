@@ -41,6 +41,12 @@
     <![endif]-->
 
 </head>
+<script type="text/javascript">
+	function OpenInNewTab(url) {
+		var win = window.open(url, '_blank');
+		win.focus();
+	}
+</script>
 
 <body>
 
@@ -121,7 +127,7 @@
 									</div>
 								</div>
 						</a></li>
-						<li class="divider"></li>
+						<li class="divider"></li> -->
 						<li><a href="#">
 								<div>
 									<p>
@@ -240,6 +246,7 @@
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
+						<%-- 
 						<li class="sidebar-search">
 							<div class="input-group custom-search-form">
 								<input type="text" class="form-control" placeholder="Search...">
@@ -248,16 +255,22 @@
 										<i class="fa fa-search"></i>
 									</button>
 								</span>
-							</div> <!-- /input-group -->
+							</div> 
+							<!-- /input-group -->
 						</li>
+					
+						
+					
 						<li><a href="index.jsp"><i class="fa fa-dashboard fa-fw"></i>
-								Dashboard</a></li>
+								Dashboard</a></li> 
+							
 						<li><a href="#"><i class="fa fa-bar-chart-o fa-fw"></i>
 								Charts<span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="flot.html">Flot Charts</a></li>
 								<li><a href="morris.html">Morris.js Charts</a></li>
 							</ul> <!-- /.nav-second-level --></li>
+						
 						<li><a href="tables.html"><i class="fa fa-table fa-fw"></i>
 								Tables</a></li>
 						<li><a href="forms.html"><i class="fa fa-edit fa-fw"></i>
@@ -284,7 +297,7 @@
 										<li><a href="#">Third Level Item</a></li>
 										<li><a href="#">Third Level Item</a></li>
 									</ul> <!-- /.nav-third-level --></li>
-							</ul> <!-- /.nav-second-level --></li>
+							</ul> <!-- /.nav-second-level --></li>	--%>
 						<li class="active"><a href="#"><i
 								class="fa fa-files-o fa-fw"></i> Sample Pages<span
 								class="fa arrow"></span></a>
@@ -337,26 +350,38 @@
 					<br>
 
 
-	<c:if test="${not empty msj}">
-		    <div class="alert alert-${css} alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" 
-                                aria-label="Close">
-				<span aria-hidden="true">×</span>
-			</button>
-			<strong>${msj}</strong>
-		    </div>
-		</c:if>
+				<c:if test="${not empty msg}">
+						<div class="alert alert-${css} alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert"
+								aria-label="Close">
+								<span aria-hidden="true">×</span>
+							</button>
+							<strong>${msg}</strong>
+						</div>
+					</c:if>
 
-
+					
 					<div class="panel panel-default">
-						<div class="panel-heading">Datos del alumno</div>
+						<c:choose>
+							<c:when test="${not empty id}">
+								<div class="panel-heading">Editar alumno</div>
+							</c:when>
+							<c:otherwise>
+
+								<div class="panel-heading">Datos del alumno</div>
+
+							</c:otherwise>
+						</c:choose>
+
+
+
 						<div class="panel-body">
 
 
 							<form class="form-horizontal" role="form"
-								action="<%=request.getContextPath()%>/guardar">
-								 <input type="hidden" name="id" value="${msj}"/> 
-								
+								action="<%=request.getContextPath()%>/guardar" method="post">
+								<input type="hidden" name="id" value="${id}" />
+
 								<div class="form-group">
 									<label for="matricula_1" class="col-lg-1 control-label">matricula</label>
 									<div class="col-lg-2">
@@ -472,13 +497,20 @@
 											value="${i2.id}/eliminar" var="updateUrl" />
 
 										<button class="btn btn-info"
-											onclick="location.href='${userUrl}'">Reporte</button>
+											onclick="location.href='${userUrl}'" formtarget="_blank">Reporte</button>
+
+										<!--<button class="btn btn-info"
+											onclick="OpenInNewTab(location.href='${userUrl}')">Reporte2</button>
+
+
+										<button class="btn btn-info"
+											onclick="window.open(location.href='${userUrl}')">Reporte3</button>-->
+
+
 										<button class="btn btn-primary"
 											onclick="location.href='${deleteUrl}'">editar</button>
 										<button class="btn btn-danger"
-											onclick="location.href='${updateUrl}'">eliminar</button>
-									
-									</td>
+											onclick="location.href='${updateUrl}'">eliminar</button></td>
 
 								</tr>
 							</tbody>
