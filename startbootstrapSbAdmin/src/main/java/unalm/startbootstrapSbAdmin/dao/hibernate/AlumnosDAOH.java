@@ -88,9 +88,11 @@ public class AlumnosDAOH extends BaseHibernateDAO implements AlumnosDao {
 				.createAlias("alumnosTramitesDoc", "a")
 				.createAlias("a.especial", "e")
 				.createAlias("a.alumnosFac", "af")
-				.createAlias("a.alumnosProfesor", "ap");
+				.createAlias("a.alumnosProfesor", "ap")
+				.createAlias("a.promCiclos", "pc",Criteria.LEFT_JOIN);
 		criteria.add(Restrictions.eq("a.matricula", String.valueOf(id)));
-		criteria.add(Restrictions.eq("p.solicitud", "BAC"));;
+		criteria.add(Restrictions.eq("p.solicitud", "BAC"));
+		criteria.add(Restrictions.isNotNull("pc.ppg"));
 		return (TramitesDoc) criteria.uniqueResult();
 
 	}

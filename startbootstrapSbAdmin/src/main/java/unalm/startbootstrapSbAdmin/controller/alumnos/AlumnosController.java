@@ -109,7 +109,7 @@ public class AlumnosController {
 		PromCiclos promCiclos = service.findAlumno2(searchString);
 		TramitesDoc tramitesDoc = service.findTramite(searchString);
 		System.out.println("la matricula de tramite es de: "+tramitesDoc.getAlumnosTramitesDoc().getAlu_nombre());
-
+		System.out.println("datos de tramites a promCiclos: "+tramitesDoc.getAlumnosTramitesDoc().getPromCiclos().iterator().next().getPpg());
 
 		if (promCiclos == null) {
 			List<RgBachAlumno> registro = service.allRegistros();
