@@ -1,8 +1,10 @@
 package unalm.startbootstrapSbAdmin.controller.alumnos;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -57,7 +59,7 @@ public class AlumnosController {
 
 	}
 
-	@RequestMapping("{id}/editar")
+	@RequestMapping(value = "user/{id}/editar", method = RequestMethod.GET)
 	public String editar(@PathVariable("id") Long id, Model model) {
 
 		System.out.println("entro a editar");
@@ -66,6 +68,7 @@ public class AlumnosController {
 		 * return "test/index"; }
 		 */
 		RgBachAlumno rgBachAlumno = service.findRegistro(id);
+		
 
 		Facultad facultad = new Facultad();
 		facultad.setFacNombre(rgBachAlumno.getFacNombre());
@@ -74,7 +77,7 @@ public class AlumnosController {
 		especial.setEspNombre(rgBachAlumno.getEspNombre());
 
 		Profesor profesor = new Profesor();
-		profesor.setProCodigo(rgBachAlumno.getProCodigo());
+		profesor.setProNombre(rgBachAlumno.getProCodigo());
 
 		Alumnos alumnos = new Alumnos();
 		alumnos.setMatricula(rgBachAlumno.getMatricula());
@@ -83,22 +86,31 @@ public class AlumnosController {
 		// alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
 		alumnos.setAlumnosProfesor(profesor);
 		alumnos.setEspecial(especial);
+	
 
 		PromCiclos promCiclos = new PromCiclos();
-		promCiclos.setAlumnosPromCiclos(alumnos);
-		promCiclos.setCiclo(rgBachAlumno.getCiclo());
-		promCiclos.setEspCodigo(rgBachAlumno.getEspNombre());
-		promCiclos.setFacCodigo(rgBachAlumno.getFacNombre());
 		promCiclos.setPpg(Long.valueOf(rgBachAlumno.getPpg()));
+		promCiclos.setCiclo(rgBachAlumno.getCiclo());
+		Set<PromCiclos> promCiclos1 = new HashSet<PromCiclos>(0);
 
+		promCiclos1.add(promCiclos);
+
+		alumnos.setPromCiclos(promCiclos1);
+
+		
+		
+		TramitesDoc tramitesDoc = new TramitesDoc();
+		tramitesDoc.setAlumnosTramitesDoc(alumnos);
+		
 		model.addAttribute("id", rgBachAlumno.getId());
 
 		List<RgBachAlumno> registro = service.allRegistros();
 		model.addAttribute("registros", registro);
-		model.addAttribute("alumnos", promCiclos);
+		model.addAttribute("alumnos", tramitesDoc);
 		model.addAttribute("css", "success");
 		model.addAttribute("msg", "El id es: " + rgBachAlumno.getId());
-		return "test/index";
+		return "test/bachillerEdit";
+		//return "redirect:/";
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
@@ -108,19 +120,20 @@ public class AlumnosController {
 
 		PromCiclos promCiclos = service.findAlumno2(searchString);
 		TramitesDoc tramitesDoc = service.findTramite(searchString);
-		System.out.println("la matricula de tramite es de: "+tramitesDoc.getAlumnosTramitesDoc().getAlu_nombre());
-		System.out.println("datos de tramites a promCiclos: "+tramitesDoc.getAlumnosTramitesDoc().getPromCiclos().iterator().next().getPpg());
-
-		if (promCiclos == null) {
+		System.out.println("tramites:  "
+				+ tramitesDoc.getAlumnosTramitesDoc().getPromCiclos()
+						.iterator().next().getPpg());
+		if (tramitesDoc == null) {
 			List<RgBachAlumno> registro = service.allRegistros();
 			model.addAttribute("registros", registro);
 			model.addAttribute("css", "danger");
-			model.addAttribute("msg","No se encontro el alumno con la matricula: "+ searchString);
+			model.addAttribute("msg",
+					"No se encontro el alumno con la matricula: "
+							+ searchString);
 			return "test/index";
-			}
+		}
 
-		model.addAttribute("alumnos", promCiclos);
-		System.out.println(promCiclos.getAlumnosPromCiclos().getMatricula());
+		model.addAttribute("alumnos", tramitesDoc);
 		List<RgBachAlumno> registro = service.allRegistros();
 		model.addAttribute("registros", registro);
 

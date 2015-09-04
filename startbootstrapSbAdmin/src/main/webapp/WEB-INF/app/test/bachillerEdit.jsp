@@ -51,7 +51,7 @@
 <body>
 
 	<div id="wrapper">
-<spring:url value="/report/index" var="urlReportHisto" />
+
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -303,9 +303,9 @@
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="active" href="">Formulario Bachiller</a></li>
-								<li><a href="#">Reporte<span class="fa arrow"></span></a>
+								<li><a href="#">Reportes <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a  href="${urlReportHisto}">Historial Pregrado</a></li>
+										<li><a href="#">Historial Pregrado</a></li>
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
@@ -467,63 +467,6 @@
 						</div>
 					</div>
 
-
-
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Matricula</th>
-								<th>Alumno nombre</th>
-								<th>Ppg</th>
-								<th>facultad</th>
-								<th>Carrera</th>
-								<th>Profesor Consejero</th>
-								<th>Ciclo</th>
-								<th>Usuario</th>
-								<th>Acción</th>
-							</tr>
-						</thead>
-
-
-						<c:forEach var="i2" items="${registros}">
-							<tbody>
-								<tr>
-									<td>${i2.id}</td>
-									<td>${i2.matricula}</td>
-									<td>${i2.aluNombre}</td>
-									<td>${i2.ppg}</td>
-									<td>${i2.facNombre}</td>
-									<td>${i2.espNombre}</td>
-									<td>${i2.proCodigo}</td>
-									<td>${i2.ciclo}</td>
-									<td>${i2.usuario}</td>
-
-									<td><spring:url value="${i2.id}/pdf" var="userUrl" /> <spring:url
-											value="user/${i2.id}/editar" var="deleteUrl" /> <spring:url
-											value="${i2.id}/eliminar" var="updateUrl" />
-
-										<button class="btn btn-info"
-											onclick="location.href='${userUrl}'" formtarget="_blank">Reporte</button>
-
-										<!--<button class="btn btn-info"
-											onclick="OpenInNewTab(location.href='${userUrl}')">Reporte2</button>
-
-
-										<button class="btn btn-info"
-											onclick="window.open(location.href='${userUrl}')">Reporte3</button>-->
-
-
-										<button class="btn btn-primary"
-											onclick="location.href='${deleteUrl}'">editar</button>
-										<button class="btn btn-danger"
-											onclick="location.href='${updateUrl}'">eliminar</button></td>
-
-								</tr>
-							</tbody>
-
-						</c:forEach>
-					</table>
 
 
 				</div>

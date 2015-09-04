@@ -51,7 +51,7 @@
 <body>
 
 	<div id="wrapper">
-<spring:url value="/report/index" var="urlReportHisto" />
+
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -303,9 +303,9 @@
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="active" href="">Formulario Bachiller</a></li>
-								<li><a href="#">Reporte<span class="fa arrow"></span></a>
+								<li><a href="#">Reportes <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a  href="${urlReportHisto}">Historial Pregrado</a></li>
+										<li><a href="#">Historial Pregrado</a></li>
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
@@ -314,7 +314,6 @@
 			</div>
 			<!-- /.navbar-static-side -->
 		</nav>
-
 		<!-- Page Content -->
 		<div id="page-wrapper">
 			<div class="container-fluid">
@@ -327,12 +326,13 @@
 				<!-- /.row -->
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Bachiller</div>
+				<div class="panel-heading">Historial Pregrado Español</div>
 				<div class="panel-body">
 
 					<div>
 
-						<form method="get" action="<%=request.getContextPath()%>/search">
+						<form method="get"
+							action="<%=request.getContextPath()%>/reportHistoEsp">
 							<div class="row">
 								<div class="col-lg-3">
 									<div class="input-group">
@@ -344,188 +344,12 @@
 									<!-- /input-group -->
 								</div>
 								<!-- /.col-lg-6 -->
-
 							</div>
 							<!-- /.row -->
 
 						</form>
 					</div>
 					<br>
-
-
-					<c:if test="${not empty msg}">
-						<div class="alert alert-${css} alert-dismissible" role="alert">
-							<button type="button" class="close" data-dismiss="alert"
-								aria-label="Close">
-								<span aria-hidden="true">×</span>
-							</button>
-							<strong>${msg}</strong>
-						</div>
-					</c:if>
-
-
-					<div class="panel panel-default">
-						<c:choose>
-							<c:when test="${not empty id}">
-								<div class="panel-heading">Editar alumno</div>
-							</c:when>
-							<c:otherwise>
-
-								<div class="panel-heading">Datos del alumno</div>
-
-							</c:otherwise>
-						</c:choose>
-
-
-
-						<div class="panel-body">
-
-
-							<form class="form-horizontal" role="form"
-								action="<%=request.getContextPath()%>/guardar" method="post">
-								<input type="hidden" name="id" value="${id}" />
-
-								<div class="form-group">
-									<label for="matricula_1" class="col-lg-1 control-label">matricula</label>
-									<div class="col-lg-2">
-										<input type="text" class="form-control" id="matricula_1"
-											placeholder="Matricula"
-											value="${alumnos.alumnosTramitesDoc.matricula}"
-											name="matricula">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="nombre_1" class="col-lg-1 control-label">Nombre</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="nombre_1"
-											placeholder="Nombre"
-											value="${alumnos.alumnosTramitesDoc.alu_nombre}"
-											name="aluNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="facultad_1" class="col-lg-1 control-label">Facultad</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="facultad_1"
-											placeholder="Facultad"
-											value="${alumnos.alumnosTramitesDoc.alumnosFac.facNombre}"
-											name="facNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="carrera_1" class="col-lg-1 control-label">Carrera
-										Profesional</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="carrera_1"
-											placeholder="Carrera"
-											value="${alumnos.alumnosTramitesDoc.especial.espNombre}"
-											name="espNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="creditos_1" class="col-lg-1 control-label">Creditos
-										Aprobados</label>
-									<div class="col-lg-1">
-										<input type="text" class="form-control" id="creditos_1"
-											placeholder="Creditos"
-											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ppg}"
-											name="ppg">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="profesor_1" class="col-lg-1 control-label">Profesor
-										consejero</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id=""
-											profesor_1""
-											placeholder="Profesor consejero"
-											value="${alumnos.alumnosTramitesDoc.alumnosProfesor.proNombre}"
-											name="proCodigo">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="promocion_1" class="col-lg-1 control-label">Promocion</label>
-									<div class="col-lg-1">
-										<input type="text" class="form-control" id="promocion_1"
-											placeholder="Promocion"
-											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ciclo}"
-											name="ciclo">
-									</div>
-								</div>
-
-
-								<div class="form-group">
-									<div class="col-lg-offset-1 col-lg-10">
-										<button type="submit" class="btn btn-default">Guardar</button>
-									</div>
-								</div>
-							</form>
-
-
-
-
-						</div>
-					</div>
-
-
-
-					<table class="table table-hover">
-						<thead>
-							<tr>
-								<th>Id</th>
-								<th>Matricula</th>
-								<th>Alumno nombre</th>
-								<th>Ppg</th>
-								<th>facultad</th>
-								<th>Carrera</th>
-								<th>Profesor Consejero</th>
-								<th>Ciclo</th>
-								<th>Usuario</th>
-								<th>Acción</th>
-							</tr>
-						</thead>
-
-
-						<c:forEach var="i2" items="${registros}">
-							<tbody>
-								<tr>
-									<td>${i2.id}</td>
-									<td>${i2.matricula}</td>
-									<td>${i2.aluNombre}</td>
-									<td>${i2.ppg}</td>
-									<td>${i2.facNombre}</td>
-									<td>${i2.espNombre}</td>
-									<td>${i2.proCodigo}</td>
-									<td>${i2.ciclo}</td>
-									<td>${i2.usuario}</td>
-
-									<td><spring:url value="${i2.id}/pdf" var="userUrl" /> <spring:url
-											value="user/${i2.id}/editar" var="deleteUrl" /> <spring:url
-											value="${i2.id}/eliminar" var="updateUrl" />
-
-										<button class="btn btn-info"
-											onclick="location.href='${userUrl}'" formtarget="_blank">Reporte</button>
-
-										<!--<button class="btn btn-info"
-											onclick="OpenInNewTab(location.href='${userUrl}')">Reporte2</button>
-
-
-										<button class="btn btn-info"
-											onclick="window.open(location.href='${userUrl}')">Reporte3</button>-->
-
-
-										<button class="btn btn-primary"
-											onclick="location.href='${deleteUrl}'">editar</button>
-										<button class="btn btn-danger"
-											onclick="location.href='${updateUrl}'">eliminar</button></td>
-
-								</tr>
-							</tbody>
-
-						</c:forEach>
-					</table>
-
-
 				</div>
 
 				<!-- /.container-fluid -->

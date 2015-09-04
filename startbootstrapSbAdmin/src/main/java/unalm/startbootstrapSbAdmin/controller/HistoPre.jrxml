@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HistoPre" columnCount="2" pageWidth="595" pageHeight="842" columnWidth="272" columnSpacing="10" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.7715610000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<parameter name="P_MATRICULA" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["G:\\REPORTES Y CONSULTAS\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select fr.aux.ordciclo(h.ciclo) ord,fr.aux.sem(h.ciclo,'t') SEM,h.matricula,
+'ALUMNO ' || decode(f.fac_codigo,'020',replace(f.fac_nombre,' '),f.fac_nombre) || decode(f.fac_codigo,e.esp_codigo,null,' Especialidad de '||e.esp_nombre) fnom,
+e.esp_nombre,c.cur_nuevo,c.cur_nombre,
+       a.alu_nombre,h.nota,h.cur_credit cred,
+1*decode(H.NOTA,'TE',NULL,to_number(h.cur_credit)) ccs,
+1*decode(UPPER(h.nota),'AP',TO_NUMBER(H.CUR_CREDIT),'TE',NULL,'DE',NULL,DECODE(SIGN(TO_NUMBER(H.NOTA)-10),1,TO_NUMBER(H.CUR_CREDIT),0)) capa,
+1*decode(UPPER(h.nota),'AP',NULL,'TE',NULL,'DE',NULL,TO_NUMBER(H.NOTA))*TO_NUMBER(H.CUR_CREDIT) p_ppa,
+1*decode(UPPER(h.nota),'AP',NULL,'TE',NULL,'DE',NULL,TO_NUMBER(H.CUR_CREDIT)) c_ppa,
+decode(h.ciclo,fr.aux.mx_ciclo_ap(h.matricula),'1','0') ccl
+from oficina.histo h,oficina.cursos c,oficina.alumnos a,oficina.especial e,
+     oficina.facultad f,oficina.prom_ciclos p
+where h.cur_codigo=c.cur_codigo and h.matricula=a.matricula and p.esp_codigo=e.esp_codigo
+      and p.fac_codigo=f.fac_codigo
+      and a.matricula = p.matricula and p.ciclo = fr.aux.mx_ciclo_ap(a.matricula)
+      and h.matricula= $P{P_MATRICULA}
+      and h.cur_credit <> 0
+      and h.mov in ('1','3')
+      and decode(UPPER(h.nota),'AP',20,'TE',8,'DE',0,TO_NUMBER(H.NOTA)) > 10
+order by ord,c.cur_nombre]]>
+	</queryString>
+	<field name="ORD" class="java.lang.String"/>
+	<field name="SEM" class="java.lang.String"/>
+	<field name="MATRICULA" class="java.lang.String"/>
+	<field name="FNOM" class="java.lang.String"/>
+	<field name="ESP_NOMBRE" class="java.lang.String"/>
+	<field name="CUR_NUEVO" class="java.lang.String"/>
+	<field name="CUR_NOMBRE" class="java.lang.String"/>
+	<field name="ALU_NOMBRE" class="java.lang.String"/>
+	<field name="NOTA" class="java.lang.String"/>
+	<field name="CRED" class="java.math.BigDecimal"/>
+	<field name="CCS" class="java.math.BigDecimal"/>
+	<field name="CAPA" class="java.math.BigDecimal"/>
+	<field name="P_PPA" class="java.math.BigDecimal"/>
+	<field name="C_PPA" class="java.math.BigDecimal"/>
+	<field name="CCL" class="java.lang.String"/>
+	<group name="GROUP_ORD">
+		<groupExpression><![CDATA[$F{ORD}]]></groupExpression>
+		<groupHeader>
+			<band height="21">
+				<textField>
+					<reportElement x="0" y="1" width="268" height="20"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{SEM}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="2"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="65" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="25" width="188" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{ALU_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="45" width="555" height="20"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{FNOM}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="25" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{MATRICULA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch"/>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="0" width="216" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CUR_NOMBRE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="33" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{NOTA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="248" y="0" width="30" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CRED}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="58"/>
+	</columnFooter>
+	<lastPageFooter>
+		<band height="104">
+			<subreport>
+				<reportElement x="-1" y="-57" width="256" height="57"/>
+				<subreportParameter name="P_MATRICULA">
+					<subreportParameterExpression><![CDATA[$P{P_MATRICULA}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "HistoPre_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band height="111" splitType="Stretch"/>
+	</summary>
+</jasperReport>

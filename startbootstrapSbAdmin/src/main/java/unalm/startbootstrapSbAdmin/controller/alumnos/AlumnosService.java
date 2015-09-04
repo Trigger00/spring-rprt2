@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.controller.alumnos;
 
+import java.sql.Connection;
 import java.util.List;
 
 import unalm.startbootstrapSbAdmin.model.Alumnos;
@@ -17,5 +18,5 @@ public interface AlumnosService {
 	TramitesDoc findTramite(Long codigo);
 	//void guardAlumno(Alumnos alumno);
 	void guardAlumno(RgBachAlumno rgBachAlumnoDao);
-	
+	Connection getConnection();
 }

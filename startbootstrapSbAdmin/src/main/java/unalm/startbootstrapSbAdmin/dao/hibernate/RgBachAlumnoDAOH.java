@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.dao.hibernate;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -43,6 +44,11 @@ public class RgBachAlumnoDAOH extends BaseHibernateDAO implements
 	Criteria criteria = this.getSession().createCriteria(RgBachAlumno.class);
 	criteria.add(Restrictions.eq("id", Codigo));
 	return (RgBachAlumno) criteria.uniqueResult();
+	}
+
+	public Connection getConnectionDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

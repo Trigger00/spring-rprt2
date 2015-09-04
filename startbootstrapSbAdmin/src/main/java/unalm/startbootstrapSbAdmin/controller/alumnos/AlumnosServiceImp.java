@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.controller.alumnos;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,6 +59,11 @@ public class AlumnosServiceImp implements AlumnosService {
 
 	public TramitesDoc findTramite(Long codigo) {
 		return alumnosDAO.get2(codigo);
+	}
+
+	public Connection getConnection() {
+		
+		return alumnosDAO.getConnectionDAO();
 	}
 
 

@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.dao.hibernate;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -49,6 +50,11 @@ public class ProfesorDAOH extends BaseHibernateDAO implements ProfesorDAO {
 		Criteria criteria = this.getSession().createCriteria(Profesor.class);
 		criteria.add(Restrictions.eq("proCodigo", codigo));
 		return (Profesor) criteria.uniqueResult();
+	}
+
+	public Connection getConnectionDAO() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 

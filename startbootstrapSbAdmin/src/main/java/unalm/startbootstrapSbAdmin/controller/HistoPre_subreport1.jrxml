@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HistoPre_subreport1" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="P_MATRICULA" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select t.ciclo,t.matricula,t.cca,t.capa,trim(to_char(trunc(t.ppa,2),'90.00')) ppa,
+       t.nivel||decode(t.nivel,1,'er',2,'do',3,'er',4,'to',5,'to')||' AÑO' nivel
+from oficina.prom_ciclos t
+where (t.ciclo = fr.aux.mx_ciclo_ap(t.matricula))
+--AND T.MATRICULA = '19900084'
+AND T.MATRICULA = $P{P_MATRICULA}]]>
+	</queryString>
+	<field name="CICLO" class="java.lang.String"/>
+	<field name="MATRICULA" class="java.lang.String"/>
+	<field name="CCA" class="java.math.BigDecimal"/>
+	<field name="CAPA" class="java.math.BigDecimal"/>
+	<field name="PPA" class="java.lang.String"/>
+	<field name="NIVEL" class="java.lang.String"/>
+	<title>
+		<band height="58">
+			<staticText>
+				<reportElement x="3" y="0" width="159" height="13"/>
+				<textElement textAlignment="Center">
+					<font isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN Y EVALUACION ACADEMICA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="13" width="171" height="13"/>
+				<textElement>
+					<font isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE CREDITOS CURSADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="26" width="171" height="13"/>
+				<textElement>
+					<font isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE CREDITOS APROBADOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="39" width="171" height="13"/>
+				<textElement>
+					<font isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[PROMEDIO PONDERADO ACUMULADO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="184" y="13" width="25" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CCA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="26" width="25" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{CAPA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="184" y="39" width="25" height="13"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{PPA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

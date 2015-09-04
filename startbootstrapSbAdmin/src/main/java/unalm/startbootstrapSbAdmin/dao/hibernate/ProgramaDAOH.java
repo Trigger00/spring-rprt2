@@ -7,7 +7,10 @@ package unalm.startbootstrapSbAdmin.dao.hibernate;
 
 import unalm.startbootstrapSbAdmin.dao.ProgramaDAO;
 import unalm.startbootstrapSbAdmin.model.Programa;
+
+import java.sql.Connection;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -51,5 +54,10 @@ public class ProgramaDAOH extends BaseHibernateDAO implements ProgramaDAO {
         criteria.add(Restrictions.eq("codigo", codigo));
         return (Programa) criteria.uniqueResult();
     }
+
+	public Connection getConnectionDAO() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

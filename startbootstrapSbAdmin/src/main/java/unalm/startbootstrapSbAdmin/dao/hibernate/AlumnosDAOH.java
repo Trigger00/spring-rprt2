@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.dao.hibernate;
 
+import java.sql.Connection;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -95,6 +96,10 @@ public class AlumnosDAOH extends BaseHibernateDAO implements AlumnosDao {
 		criteria.add(Restrictions.isNotNull("pc.ppg"));
 		return (TramitesDoc) criteria.uniqueResult();
 
+	}
+
+	public Connection getConnectionDAO() {
+		  return this.getSessionFactory().openStatelessSession().connection();
 	}
 
 }

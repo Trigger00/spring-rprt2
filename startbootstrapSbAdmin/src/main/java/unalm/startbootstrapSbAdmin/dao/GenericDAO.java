@@ -1,5 +1,6 @@
 package unalm.startbootstrapSbAdmin.dao;
 
+import java.sql.Connection;
 import java.util.List;
 
 public interface GenericDAO<T> {
@@ -13,4 +14,5 @@ public interface GenericDAO<T> {
     public void update(T t);
 
     public void delete(Long t);
+    public Connection getConnectionDAO();
 }
