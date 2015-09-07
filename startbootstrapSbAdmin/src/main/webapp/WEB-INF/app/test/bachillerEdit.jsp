@@ -51,7 +51,7 @@
 <body>
 
 	<div id="wrapper">
-
+<spring:url value="/report3/index" var="urlReportHisto" />
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -298,14 +298,14 @@
 										<li><a href="#">Third Level Item</a></li>
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>	--%>
-						<li class="active"><a href="#"><i
+								<li class="active"><a href="#"><i
 								class="fa fa-files-o fa-fw"></i> Sample Pages<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="active" href="">Formulario Bachiller</a></li>
-								<li><a href="#">Reportes <span class="fa arrow"></span></a>
+								<li><a href="#">Reporte<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a href="#">Historial Pregrado</a></li>
+										<li><a href="${urlReportHisto}">Historial Pregrado</a></li>
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>

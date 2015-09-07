@@ -50,9 +50,6 @@ public class AlumnosController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String index(Model model) {
 
-		List<Alumnos> alumnos = service.allAlumnos();
-		model.addAttribute("alumnos2", alumnos);
-
 		List<RgBachAlumno> registro = service.allRegistros();
 		model.addAttribute("registros", registro);
 		return "test/index";
