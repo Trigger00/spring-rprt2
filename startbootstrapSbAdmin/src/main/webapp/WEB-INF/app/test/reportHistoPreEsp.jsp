@@ -51,7 +51,7 @@
 <body>
 
 	<div id="wrapper">
-
+		<spring:url value="/" var="urlForm" />
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -302,8 +302,9 @@
 								class="fa fa-files-o fa-fw"></i> Sample Pages<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a class="active" href="">Formulario Bachiller</a></li>
-								<li><a href="#">Reportes <span class="fa arrow"></span></a>
+								<li><a class="active" href="${urlForm}">Formulario
+										Bachiller</a></li>
+								<li><a href="">Reportes <span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
 										<li><a href="#">Historial Pregrado</a></li>
 									</ul> <!-- /.nav-third-level --></li>
@@ -331,22 +332,21 @@
 
 					<div>
 
-						<form method="get"
-							action="<%=request.getContextPath()%>/reportHistoEsp">
-							<div class="row">
-								<div class="col-lg-3">
-									<div class="input-group">
-										<span class="input-group-btn">
-											<button class="btn btn-default" type="submit">Buscar</button>
-										</span> <input type="text" class="form-control" name="searchString"
-											placeholder="Matricula">
-									</div>
-									<!-- /input-group -->
+						<form class="form-horizontal" role="form"
+							action="<%=request.getContextPath()%>/report3/pdf" method="post">
+							<div class="form-group">
+								<label for="matricula_1" class="col-lg-1 control-label">Matricula</label>
+								<div class="col-lg-2">
+									<input type="text" class="form-control" id="matricula_1"
+										placeholder="Matricula" name="matricula">
 								</div>
-								<!-- /.col-lg-6 -->
 							</div>
-							<!-- /.row -->
 
+							<div class="form-group">
+								<div class="col-lg-offset-1 col-lg-10">
+									<button type="submit" class="btn btn-default">Generar Reporte</button>
+								</div>
+							</div>
 						</form>
 					</div>
 					<br>

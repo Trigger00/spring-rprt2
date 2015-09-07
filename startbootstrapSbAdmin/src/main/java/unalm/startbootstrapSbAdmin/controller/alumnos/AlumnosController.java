@@ -118,12 +118,12 @@ public class AlumnosController {
 			Model model) {
 		System.out.println("El valo del searchString es " + searchString);
 
-		PromCiclos promCiclos = service.findAlumno2(searchString);
+		System.out.println("salio del promCiclos");
 		TramitesDoc tramitesDoc = service.findTramite(searchString);
-		System.out.println("tramites:  "
-				+ tramitesDoc.getAlumnosTramitesDoc().getPromCiclos()
-						.iterator().next().getPpg());
+		
+		System.out.println("salio del tramite, el valor es de "+ "- " +tramitesDoc);
 		if (tramitesDoc == null) {
+			System.out.println("entro al if");
 			List<RgBachAlumno> registro = service.allRegistros();
 			model.addAttribute("registros", registro);
 			model.addAttribute("css", "danger");

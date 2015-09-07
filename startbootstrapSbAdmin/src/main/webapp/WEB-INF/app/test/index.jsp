@@ -51,7 +51,7 @@
 <body>
 
 	<div id="wrapper">
-<spring:url value="/report/index" var="urlReportHisto" />
+		<spring:url value="/report3/index" var="urlReportHisto" />
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -305,7 +305,7 @@
 								<li><a class="active" href="">Formulario Bachiller</a></li>
 								<li><a href="#">Reporte<span class="fa arrow"></span></a>
 									<ul class="nav nav-third-level">
-										<li><a  href="${urlReportHisto}">Historial Pregrado</a></li>
+										<li><a href="${urlReportHisto}">Historial Pregrado</a></li>
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>
 					</ul>
