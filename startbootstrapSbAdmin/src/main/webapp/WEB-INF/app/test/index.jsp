@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,11 +48,25 @@
 		win.focus();
 	}
 </script>
-
+<script type="text/javascript">
+	function DoSubmit() {
+		var urlBase = "${pageContext.request.contextPath}";
+		window.open(urlBase);
+	}
+</script>
+<script type="text/javascript">
+	function DoSubmit1(data) {
+		var urlBase = data;
+		window.open(data);
+	}
+</script>
 <body>
 
 	<div id="wrapper">
 		<spring:url value="/report3/index" var="urlReportHisto" />
+		<spring:url value="/" var="urlReportHisto1" />
+		<c:set var="baseURL" value="${pageContext.request.contextPath}" />
+
 		<!-- Navigation -->
 		<nav class="navbar navbar-default navbar-static-top" role="navigation"
 			style="margin-bottom: 0">
@@ -459,6 +474,11 @@
 										<button type="submit" class="btn btn-default">Guardar</button>
 									</div>
 								</div>
+
+
+								<!--<a onclick="DoSubmit();">TEST</a> -->
+
+
 							</form>
 
 
@@ -468,6 +488,108 @@
 					</div>
 
 
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        	<form class="form-horizontal" role="form"
+								action="<%=request.getContextPath()%>/guardar" method="post">
+								<input type="hidden" name="id" value="${id}" />
+
+								<div class="form-group">
+									<label for="matricula_1" class="col-lg-1 control-label">matricula</label>
+									<div class="col-lg-2">
+										<input type="text" class="form-control" id="matricula_1"
+											placeholder="Matricula"
+											value="${alumnos.alumnosTramitesDoc.matricula}"
+											name="matricula">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="nombre_1" class="col-lg-1 control-label">Nombre</label>
+									<div class="col-lg-8">
+										<input type="text" class="form-control" id="nombre_1"
+											placeholder="Nombre"
+											value="${alumnos.alumnosTramitesDoc.alu_nombre}"
+											name="aluNombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="facultad_1" class="col-lg-1 control-label">Facultad</label>
+									<div class="col-lg-8">
+										<input type="text" class="form-control" id="facultad_1"
+											placeholder="Facultad"
+											value="${alumnos.alumnosTramitesDoc.alumnosFac.facNombre}"
+											name="facNombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="carrera_1" class="col-lg-1 control-label">Carrera
+										Profesional</label>
+									<div class="col-lg-8">
+										<input type="text" class="form-control" id="carrera_1"
+											placeholder="Carrera"
+											value="${alumnos.alumnosTramitesDoc.especial.espNombre}"
+											name="espNombre">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="creditos_1" class="col-lg-1 control-label">Creditos
+										Aprobados</label>
+									<div class="col-lg-1">
+										<input type="text" class="form-control" id="creditos_1"
+											placeholder="Creditos"
+											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ppg}"
+											name="ppg">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="profesor_1" class="col-lg-1 control-label">Profesor
+										consejero</label>
+									<div class="col-lg-8">
+										<input type="text" class="form-control" id=""
+											profesor_1""
+											placeholder="Profesor consejero"
+											value="${alumnos.alumnosTramitesDoc.alumnosProfesor.proNombre}"
+											name="proCodigo">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="promocion_1" class="col-lg-1 control-label">Promocion</label>
+									<div class="col-lg-1">
+										<input type="text" class="form-control" id="promocion_1"
+											placeholder="Promocion"
+											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ciclo}"
+											name="ciclo">
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<div class="col-lg-offset-1 col-lg-10">
+										<button type="submit" class="btn btn-default">Guardar</button>
+									</div>
+								</div>
+
+
+								<!--<a onclick="DoSubmit();">TEST</a> -->
+
+
+							</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 					<table class="table table-hover">
 						<thead>
@@ -503,9 +625,10 @@
 											value="user/${i2.id}/editar" var="deleteUrl" /> <spring:url
 											value="${i2.id}/eliminar" var="updateUrl" />
 
+										<!--  <button class="btn btn-info"
+											onclick="location.href='${userUrl}'" >Reporte</button>-->
 										<button class="btn btn-info"
-											onclick="location.href='${userUrl}'" formtarget="_blank">Reporte</button>
-
+											onclick="DoSubmit1('${userUrl}');">Reporte</button>
 										<!--<button class="btn btn-info"
 											onclick="OpenInNewTab(location.href='${userUrl}')">Reporte2</button>
 
@@ -516,6 +639,10 @@
 
 										<button class="btn btn-primary"
 											onclick="location.href='${deleteUrl}'">editar</button>
+											<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+ editar2
+</button>
 										<button class="btn btn-danger"
 											onclick="location.href='${updateUrl}'">eliminar</button></td>
 

@@ -65,7 +65,6 @@ public class AlumnosController {
 		 * return "test/index"; }
 		 */
 		RgBachAlumno rgBachAlumno = service.findRegistro(id);
-		
 
 		Facultad facultad = new Facultad();
 		facultad.setFacNombre(rgBachAlumno.getFacNombre());
@@ -83,7 +82,6 @@ public class AlumnosController {
 		// alumnos.setPro_codigo(rgBachAlumno.getProCodigo());
 		alumnos.setAlumnosProfesor(profesor);
 		alumnos.setEspecial(especial);
-	
 
 		PromCiclos promCiclos = new PromCiclos();
 		promCiclos.setPpg(Long.valueOf(rgBachAlumno.getPpg()));
@@ -94,11 +92,9 @@ public class AlumnosController {
 
 		alumnos.setPromCiclos(promCiclos1);
 
-		
-		
 		TramitesDoc tramitesDoc = new TramitesDoc();
 		tramitesDoc.setAlumnosTramitesDoc(alumnos);
-		
+
 		model.addAttribute("id", rgBachAlumno.getId());
 
 		List<RgBachAlumno> registro = service.allRegistros();
@@ -107,7 +103,7 @@ public class AlumnosController {
 		model.addAttribute("css", "success");
 		model.addAttribute("msg", "El id es: " + rgBachAlumno.getId());
 		return "test/bachillerEdit";
-		//return "redirect:/";
+		// return "redirect:/";
 	}
 
 	@RequestMapping(value = "search", method = RequestMethod.GET)
@@ -117,8 +113,9 @@ public class AlumnosController {
 
 		System.out.println("salio del promCiclos");
 		TramitesDoc tramitesDoc = service.findTramite(searchString);
-		
-		System.out.println("salio del tramite, el valor es de "+ "- " +tramitesDoc);
+
+		System.out.println("salio del tramite, el valor es de " + "- "
+				+ tramitesDoc);
 		if (tramitesDoc == null) {
 			System.out.println("entro al if");
 			List<RgBachAlumno> registro = service.allRegistros();
@@ -210,5 +207,6 @@ public class AlumnosController {
 		return modelAndView;
 		// return null;
 	}
+
 
 }
