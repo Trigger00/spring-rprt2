@@ -488,108 +488,36 @@
 					</div>
 
 
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        	<form class="form-horizontal" role="form"
-								action="<%=request.getContextPath()%>/guardar" method="post">
-								<input type="hidden" name="id" value="${id}" />
-
-								<div class="form-group">
-									<label for="matricula_1" class="col-lg-1 control-label">matricula</label>
-									<div class="col-lg-2">
-										<input type="text" class="form-control" id="matricula_1"
-											placeholder="Matricula"
-											value="${alumnos.alumnosTramitesDoc.matricula}"
-											name="matricula">
-									</div>
+				<!-- Modal -->
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+						aria-labelledby="myModalLabel">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+									<h4 class="modal-title" id="myModalLabel">Editar</h4>
 								</div>
-								<div class="form-group">
-									<label for="nombre_1" class="col-lg-1 control-label">Nombre</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="nombre_1"
-											placeholder="Nombre"
-											value="${alumnos.alumnosTramitesDoc.alu_nombre}"
-											name="aluNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="facultad_1" class="col-lg-1 control-label">Facultad</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="facultad_1"
-											placeholder="Facultad"
-											value="${alumnos.alumnosTramitesDoc.alumnosFac.facNombre}"
-											name="facNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="carrera_1" class="col-lg-1 control-label">Carrera
-										Profesional</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id="carrera_1"
-											placeholder="Carrera"
-											value="${alumnos.alumnosTramitesDoc.especial.espNombre}"
-											name="espNombre">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="creditos_1" class="col-lg-1 control-label">Creditos
-										Aprobados</label>
-									<div class="col-lg-1">
-										<input type="text" class="form-control" id="creditos_1"
-											placeholder="Creditos"
-											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ppg}"
-											name="ppg">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="profesor_1" class="col-lg-1 control-label">Profesor
-										consejero</label>
-									<div class="col-lg-8">
-										<input type="text" class="form-control" id=""
-											profesor_1""
-											placeholder="Profesor consejero"
-											value="${alumnos.alumnosTramitesDoc.alumnosProfesor.proNombre}"
-											name="proCodigo">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="promocion_1" class="col-lg-1 control-label">Promocion</label>
-									<div class="col-lg-1">
-										<input type="text" class="form-control" id="promocion_1"
-											placeholder="Promocion"
-											value="${alumnos.alumnosTramitesDoc.promCiclos.iterator().next().ciclo}"
-											name="ciclo">
-									</div>
-								</div>
+								<div class="modal-body">
+									<form class="form-horizontal" role="form"
+										action="<%=request.getContextPath()%>/guardar">
+										<input type="hidden" name="id" value="${msj}" />
+										
+										<div id="result"></div>																												
+									</form>
 
-
-								<div class="form-group">
-									<div class="col-lg-offset-1 col-lg-10">
-										<button type="submit" class="btn btn-default">Guardar</button>
-									</div>
 								</div>
-
-
-								<!--<a onclick="DoSubmit();">TEST</a> -->
-
-
-							</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default"
+										data-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save
+										changes</button>
+								</div>
+							</div>
+						</div>
+					</div>
 
 					<table class="table table-hover">
 						<thead>
@@ -640,7 +568,7 @@
 										<button class="btn btn-primary"
 											onclick="location.href='${deleteUrl}'">editar</button>
 											<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="madeAjaxCall(${i2.id});">
  editar2
 </button>
 										<button class="btn btn-danger"
@@ -665,6 +593,73 @@
 		<!-- jQuery -->
 		<script
 			src="${pageContext.request.contextPath}/public//bower_components/jquery/dist/jquery.min.js"></script>
+
+
+<script type="text/javascript"
+	src="http://www.technicalkeeda.com/js/javascripts/plugin/json2.js"></script>
+<script type="text/javascript"  src="http://www.technicalkeeda.com/js/javascripts/plugin/jquery.js"></script>
+<script type="text/javascript">
+var first= $.noConflict(true);
+</script>
+<script type="text/javascript">
+function madeAjaxCall(id){
+	first.ajax({
+		type: "post",
+		url: "http://localhost:8080/startbootstrapSbAdmin/employee/add",
+		cache: false,				
+		data:'firstName=' + id + "&lastName=" + first("#lastName").val() + "&email=" + first("#email").val(),
+		success: 
+			function(response){
+			first('#result').html("");
+			var obj = JSON.parse(response);
+			//first('#result').html("First Name:- " + obj.firstName +"</br>Last Name:- " + obj.lastName  + "</br>Email:- " + obj.email);
+			//first('#result').html("matricula:- " + obj.matricula +"</br>aluNombre:- " + obj.aluNombre  + "</br>ppg:- " + obj.ppg + "</br>facNombre:- " + obj.facNombre + "</br>espNombre:- " + obj.espNombre + "</br>proCodigo:- " + obj.proCodigo + "</br>ciclo:- " + obj.ciclo);
+			first('#result').html("<div class="+"form-group" +"><label for="+"matricula_1"+" class="+"col-lg-2 control-label"+">matricula</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"matricula_1"+" placeholder="+"Matricula"+" value="+'"'+obj.matricula+'"'+" name="+"matricula"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"nombre_1"+" class="+"col-lg-2 control-label"+">Nombre</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"nombre_1"+" placeholder="+"Nombre"+" value="+'"'+obj.aluNombre+'"'+" name="+"aluNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"facultad_1"+" class="+"col-lg-2 control-label"+">Facultad</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"facultad_1"+" placeholder="+"Facultad"+" value="+'"'+obj.facNombre+'"'+" name="+"facNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"carrera_1"+" class="+"col-lg-2 control-label"+">Profesional</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"carrera_1"+" placeholder="+"Carrera"+" value="+'"'+obj.espNombre+'"'+" name="+"espNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"creditos_1"+" class="+"col-lg-2 control-label"+">Creditos Aprobados</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"creditos_1"+" placeholder="+"Creditos"+'"'+" value="+'"'+obj.ppg+'"'+" name="+"ppg"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"profesor_1"+" class="+"col-lg-2 control-label"+">Profesor consejero</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"profesor_1"+" placeholder="+"Profesor consejero"+" value="+'"'+obj.proCodigo+'"'+" name="+"proNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"promocion_1"+" class="+"col-lg-2 control-label"+">Promocion</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"promocion_1"+" placeholder="+"Promocion"+" value="+'"'+obj.ciclo+'"'+" name="+"ciclo"+"></div></div>"
+			);
+			},
+		error:
+			function(){						
+			alert('Error while request..');
+			}
+	});
+}
+</script>
+
+<script type="text/javascript">
+function madeAjaxEdit(){
+	first.ajax({
+		type: "post",
+		url: "http://localhost:8080/startbootstrapSbAdmin/employee/add",
+		cache: false,				
+		data:'firstName=' + id + "&lastName=" + first("#lastName").val() + "&email=" + first("#email").val(),
+		success: 
+			function(response){
+			first('#result').html("");
+			var obj = JSON.parse(response);
+			//first('#result').html("First Name:- " + obj.firstName +"</br>Last Name:- " + obj.lastName  + "</br>Email:- " + obj.email);
+			//first('#result').html("matricula:- " + obj.matricula +"</br>aluNombre:- " + obj.aluNombre  + "</br>ppg:- " + obj.ppg + "</br>facNombre:- " + obj.facNombre + "</br>espNombre:- " + obj.espNombre + "</br>proCodigo:- " + obj.proCodigo + "</br>ciclo:- " + obj.ciclo);
+			first('#result').html("<div class="+"form-group" +"><label for="+"matricula_1"+" class="+"col-lg-2 control-label"+">matricula</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"matricula_1"+" placeholder="+"Matricula"+" value="+'"'+obj.matricula+'"'+" name="+"matricula"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"nombre_1"+" class="+"col-lg-2 control-label"+">Nombre</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"nombre_1"+" placeholder="+"Nombre"+" value="+'"'+obj.aluNombre+'"'+" name="+"aluNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"facultad_1"+" class="+"col-lg-2 control-label"+">Facultad</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"facultad_1"+" placeholder="+"Facultad"+" value="+'"'+obj.facNombre+'"'+" name="+"facNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"carrera_1"+" class="+"col-lg-2 control-label"+">Profesional</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"carrera_1"+" placeholder="+"Carrera"+" value="+'"'+obj.espNombre+'"'+" name="+"espNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"creditos_1"+" class="+"col-lg-2 control-label"+">Creditos Aprobados</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"creditos_1"+" placeholder="+"Creditos"+'"'+" value="+'"'+obj.ppg+'"'+" name="+"ppg"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"profesor_1"+" class="+"col-lg-2 control-label"+">Profesor consejero</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"profesor_1"+" placeholder="+"Profesor consejero"+" value="+'"'+obj.proCodigo+'"'+" name="+"proNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"promocion_1"+" class="+"col-lg-2 control-label"+">Promocion</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"promocion_1"+" placeholder="+"Promocion"+" value="+'"'+obj.ciclo+'"'+" name="+"ciclo"+"></div></div>"
+			);
+			},
+		error:
+			function(){						
+			alert('Error while request..');
+			}
+	});
+}
+</script>
 
 		<!-- Bootstrap Core JavaScript -->
 		<script
