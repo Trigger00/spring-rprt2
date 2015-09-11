@@ -110,6 +110,7 @@ public class Report implements Serializable {
 		try {
 
 			if (dataSource != null) {
+				System.out.println("Genera el reporte");
 				bytes = JasperRunManager.runReportToPdf(jasperReport,
 						parameters, dataSource);
 			} else {
@@ -117,6 +118,8 @@ public class Report implements Serializable {
 						parameters, connection);
 			}
 		} catch (JRException e) {
+			
+			System.out.println("excepcion: "+ e);
 			throw new JRException(e);
 		}
 

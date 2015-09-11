@@ -47,7 +47,7 @@ public class EmployeeController {
 		System.out.println("entro al EmployeeController2");
 		Employee employee = new Employee();
 
-		String id = request.getParameter("firstName");
+		String id = request.getParameter("id");
 		System.out.println("el id es: "+ id);
 		RgBachAlumno rgBachAlumno = service.findRegistro(Long.valueOf(id));
 

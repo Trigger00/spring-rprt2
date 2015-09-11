@@ -77,10 +77,10 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp">SB Admin v2.0</a>
+				<a class="navbar-brand" href="index.jsp">UNALM Admin </a>
 			</div>
 			<!-- /.navbar-header -->
-
+			<%-- 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> <i
@@ -256,6 +256,7 @@
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
+			--%>
 			<!-- /.navbar-top-links -->
 
 			<div class="navbar-default sidebar" role="navigation">
@@ -314,7 +315,7 @@
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>	--%>
 						<li class="active"><a href="#"><i
-								class="fa fa-files-o fa-fw"></i> Sample Pages<span
+								class="fa fa-files-o fa-fw"></i>Registros<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="active" href="">Formulario Bachiller</a></li>
@@ -489,10 +490,11 @@
 
 
 				<!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-						aria-labelledby="myModalLabel">
+					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
+									<form class="form-horizontal" role="form"
+										action="<%=request.getContextPath()%>/guardar" method="post">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal"
 										aria-label="Close">
@@ -501,20 +503,19 @@
 									<h4 class="modal-title" id="myModalLabel">Editar</h4>
 								</div>
 								<div class="modal-body">
-									<form class="form-horizontal" role="form"
-										action="<%=request.getContextPath()%>/guardar">
-										<input type="hidden" name="id" value="${msj}" />
+								
+									
 										
 										<div id="result"></div>																												
-									</form>
+									
 
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default"
 										data-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save
-										changes</button>
+									<button  type="submit" class="btn btn-primary" >Guardar</button>
 								</div>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -552,7 +553,7 @@
 									<td><spring:url value="${i2.id}/pdf" var="userUrl" /> <spring:url
 											value="user/${i2.id}/editar" var="deleteUrl" /> <spring:url
 											value="${i2.id}/eliminar" var="updateUrl" />
-
+<spring:url value="employee/add" var="userUrlEdit" /> 
 										<!--  <button class="btn btn-info"
 											onclick="location.href='${userUrl}'" >Reporte</button>-->
 										<button class="btn btn-info"
@@ -565,12 +566,12 @@
 											onclick="window.open(location.href='${userUrl}')">Reporte3</button>-->
 
 
-										<button class="btn btn-primary"
-											onclick="location.href='${deleteUrl}'">editar</button>
+										<!--<button class="btn btn-primary"
+											onclick="location.href='${deleteUrl}'">editar</button>-->
 											<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" onclick="madeAjaxCall(${i2.id});">
- editar2
-</button>
+<button  class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="madeAjaxCall(${i2.id},'${userUrlEdit}');">
+ editar
+</button> 
 										<button class="btn btn-danger"
 											onclick="location.href='${updateUrl}'">eliminar</button></td>
 
@@ -602,12 +603,13 @@
 var first= $.noConflict(true);
 </script>
 <script type="text/javascript">
-function madeAjaxCall(id){
+function madeAjaxCall(id,urlBase){
 	first.ajax({
 		type: "post",
-		url: "http://localhost:8080/startbootstrapSbAdmin/employee/add",
+		//url: "http://localhost:8080/startbootstrapSbAdmin/employee/add",
+		url: urlBase,
 		cache: false,				
-		data:'firstName=' + id + "&lastName=" + first("#lastName").val() + "&email=" + first("#email").val(),
+		data:'id=' + id,
 		success: 
 			function(response){
 			first('#result').html("");
@@ -619,8 +621,9 @@ function madeAjaxCall(id){
 			+"<div class="+"form-group" +"><label for="+"facultad_1"+" class="+"col-lg-2 control-label"+">Facultad</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"facultad_1"+" placeholder="+"Facultad"+" value="+'"'+obj.facNombre+'"'+" name="+"facNombre"+"></div></div>"
 			+"<div class="+"form-group" +"><label for="+"carrera_1"+" class="+"col-lg-2 control-label"+">Profesional</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"carrera_1"+" placeholder="+"Carrera"+" value="+'"'+obj.espNombre+'"'+" name="+"espNombre"+"></div></div>"
 			+"<div class="+"form-group" +"><label for="+"creditos_1"+" class="+"col-lg-2 control-label"+">Creditos Aprobados</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"creditos_1"+" placeholder="+"Creditos"+'"'+" value="+'"'+obj.ppg+'"'+" name="+"ppg"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"profesor_1"+" class="+"col-lg-2 control-label"+">Profesor consejero</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"profesor_1"+" placeholder="+"Profesor consejero"+" value="+'"'+obj.proCodigo+'"'+" name="+"proNombre"+"></div></div>"
+			+"<div class="+"form-group" +"><label for="+"profesor_1"+" class="+"col-lg-2 control-label"+">Profesor consejero</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"profesor_1"+" placeholder="+"Profesor consejero"+" value="+'"'+obj.proCodigo+'"'+" name="+"proCodigo"+"></div></div>"
 			+"<div class="+"form-group" +"><label for="+"promocion_1"+" class="+"col-lg-2 control-label"+">Promocion</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"promocion_1"+" placeholder="+"Promocion"+" value="+'"'+obj.ciclo+'"'+" name="+"ciclo"+"></div></div>"
+			+"<input type="+"hidden"+" name="+"id"+" value="+'"'+obj.id+'"'+" />"
 			);
 			},
 		error:
@@ -631,35 +634,7 @@ function madeAjaxCall(id){
 }
 </script>
 
-<script type="text/javascript">
-function madeAjaxEdit(){
-	first.ajax({
-		type: "post",
-		url: "http://localhost:8080/startbootstrapSbAdmin/employee/add",
-		cache: false,				
-		data:'firstName=' + id + "&lastName=" + first("#lastName").val() + "&email=" + first("#email").val(),
-		success: 
-			function(response){
-			first('#result').html("");
-			var obj = JSON.parse(response);
-			//first('#result').html("First Name:- " + obj.firstName +"</br>Last Name:- " + obj.lastName  + "</br>Email:- " + obj.email);
-			//first('#result').html("matricula:- " + obj.matricula +"</br>aluNombre:- " + obj.aluNombre  + "</br>ppg:- " + obj.ppg + "</br>facNombre:- " + obj.facNombre + "</br>espNombre:- " + obj.espNombre + "</br>proCodigo:- " + obj.proCodigo + "</br>ciclo:- " + obj.ciclo);
-			first('#result').html("<div class="+"form-group" +"><label for="+"matricula_1"+" class="+"col-lg-2 control-label"+">matricula</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"matricula_1"+" placeholder="+"Matricula"+" value="+'"'+obj.matricula+'"'+" name="+"matricula"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"nombre_1"+" class="+"col-lg-2 control-label"+">Nombre</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"nombre_1"+" placeholder="+"Nombre"+" value="+'"'+obj.aluNombre+'"'+" name="+"aluNombre"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"facultad_1"+" class="+"col-lg-2 control-label"+">Facultad</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"facultad_1"+" placeholder="+"Facultad"+" value="+'"'+obj.facNombre+'"'+" name="+"facNombre"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"carrera_1"+" class="+"col-lg-2 control-label"+">Profesional</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"carrera_1"+" placeholder="+"Carrera"+" value="+'"'+obj.espNombre+'"'+" name="+"espNombre"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"creditos_1"+" class="+"col-lg-2 control-label"+">Creditos Aprobados</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"creditos_1"+" placeholder="+"Creditos"+'"'+" value="+'"'+obj.ppg+'"'+" name="+"ppg"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"profesor_1"+" class="+"col-lg-2 control-label"+">Profesor consejero</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"profesor_1"+" placeholder="+"Profesor consejero"+" value="+'"'+obj.proCodigo+'"'+" name="+"proNombre"+"></div></div>"
-			+"<div class="+"form-group" +"><label for="+"promocion_1"+" class="+"col-lg-2 control-label"+">Promocion</label><div class="+"col-lg-8"+"><input type="+"text"+" class="+"form-control"+" id="+"promocion_1"+" placeholder="+"Promocion"+" value="+'"'+obj.ciclo+'"'+" name="+"ciclo"+"></div></div>"
-			);
-			},
-		error:
-			function(){						
-			alert('Error while request..');
-			}
-	});
-}
-</script>
+
 
 		<!-- Bootstrap Core JavaScript -->
 		<script

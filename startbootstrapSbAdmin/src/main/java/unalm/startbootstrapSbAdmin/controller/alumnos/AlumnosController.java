@@ -139,6 +139,7 @@ public class AlumnosController {
 			final RedirectAttributes redirectAttributes) {
 		System.out.println("el valor de alumnos es: " + alumnos);
 		System.out.println("el valor de alumnos es: " + alumnos.getMatricula());
+		System.out.println("el valor de alumnos es: " + alumnos.getProCodigo());
 		if (alumnos.getMatricula().length() == 0) {
 			return "redirect:/";
 		}

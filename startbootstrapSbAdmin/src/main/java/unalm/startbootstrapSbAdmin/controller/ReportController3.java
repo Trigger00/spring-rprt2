@@ -44,7 +44,9 @@ public class ReportController3 {
 			report.setParameter(parameter);
 
 			report.setConnection(service.getConnection());
+			System.out.println("establecio la conexion");
 			report.PDF(request, response);
+			
 		} catch (Exception e) {
 
 		}

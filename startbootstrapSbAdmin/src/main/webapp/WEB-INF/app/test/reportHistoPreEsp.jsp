@@ -62,10 +62,10 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.jsp">SB Admin v2.0</a>
+				<a class="navbar-brand" href="index.jsp">UNALM Admin</a>
 			</div>
 			<!-- /.navbar-header -->
-
+<%-- 
 			<ul class="nav navbar-top-links navbar-right">
 				<li class="dropdown"><a class="dropdown-toggle"
 					data-toggle="dropdown" href="#"> <i
@@ -241,6 +241,8 @@
 					</ul> <!-- /.dropdown-user --></li>
 				<!-- /.dropdown -->
 			</ul>
+			
+			--%>
 			<!-- /.navbar-top-links -->
 
 			<div class="navbar-default sidebar" role="navigation">
@@ -299,7 +301,7 @@
 									</ul> <!-- /.nav-third-level --></li>
 							</ul> <!-- /.nav-second-level --></li>	--%>
 						<li class="active"><a href="#"><i
-								class="fa fa-files-o fa-fw"></i> Sample Pages<span
+								class="fa fa-files-o fa-fw"></i>Registros<span
 								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a class="active" href="${urlForm}">Formulario
